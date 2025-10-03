@@ -28,23 +28,25 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
         <Image src="/assets/icons/delete.svg" alt="edit" width={20} height={20} />
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-white">
+      <AlertDialogContent className="bg-white rounded-2xl border border-gray-200">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete?</AlertDialogTitle>
-          <AlertDialogDescription className="p-regular-16 text-grey-600">
+          <AlertDialogTitle className="text-2xl font-bold text-gray-900">Are you sure you want to delete?</AlertDialogTitle>
+          <AlertDialogDescription className="text-base text-gray-600">
             This will permanently delete this event
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="rounded-xl border-2 hover:bg-gray-50 font-semibold">Cancel</AlertDialogCancel>
 
           <AlertDialogAction
             onClick={() =>
               startTransition(async () => {
                 await deleteEvent({ eventId, path: pathname })
               })
-            }>
+            }
+            className="rounded-xl bg-red-600 hover:bg-red-700 font-semibold shadow-lg transition-all"
+          >
             {isPending ? 'Deleting...' : 'Delete'}
           </AlertDialogAction>
         </AlertDialogFooter>

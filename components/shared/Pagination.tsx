@@ -10,47 +10,43 @@ type PaginationProps = {
   urlParamName?: string;
 }
 
-const Pagination = ({page , totalPages,urlParamName}: 
-    PaginationProps) => {
-        const Router = useRouter();
-        const searchParams = useSearchParams()
+const Pagination = ({page, totalPages, urlParamName}: PaginationProps) => {
+  const Router = useRouter();
+  const searchParams = useSearchParams()
 
-        const onClick = (btnType: string) => {
-            const pageValue = btnType === 'next' ? Number(page) + 1 : Number(page) - 1;
+  const onClick = (btnType: string) => {
+    const pageValue = btnType === 'next' ? Number(page) + 1 : Number(page) - 1;
 
-            const newUrl = formUrlQuery({
-                params:searchParams.toString(),
-                key:urlParamName || 'page',
-                value: pageValue.toString(),
-            })
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: urlParamName || 'page',
+      value: pageValue.toString(),
+    })
 
-            Router.push(newUrl,{scroll:false})
-
-
-        }
+    Router.push(newUrl, {scroll: false})
+  }
     
   return (
-    <div
-    className='flex gap-2'>
-        <Button
+    <div className='flex gap-2'>
+      <Button
         size="lg"
         variant="outline"
-        className='w-28'
+        className='w-28 rounded-xl border-2 hover:border-primary-400 transition-all font-semibold'
         onClick={() => onClick('previous')}
         disabled={Number(page) <= 1}
-        >
-            Previous
-        </Button>
+      >
+        Previous
+      </Button>
 
-        <Button
+      <Button
         size="lg"
         variant="outline"
-        className='w-28'
+        className='w-28 rounded-xl border-2 hover:border-primary-400 transition-all font-semibold'
         onClick={() => onClick('next')}
         disabled={Number(page) >= totalPages}
-        >
-            Next
-        </Button>
+      >
+        Next
+      </Button>
     </div>
   )
 }
